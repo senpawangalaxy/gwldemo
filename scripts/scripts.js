@@ -113,6 +113,41 @@ function decorateButtons(main) {
   });
 }
 
+function initializeSliders(main) {
+  main.querySelectorAll('[data-slider]').forEach((slider) => {
+    const slides = [...slider.querySelectorAll('.landing-slide')];
+    if (slides.length < 2) return;
+
+    let activeIndex = 0;
+    window.setInterval(() => {
+      slides[activeIndex].classList.remove('active');
+      activeIndex = (activeIndex + 1) % slides.length;
+      slides[activeIndex].classList.add('active');
+    }, 4500);
+  });
+}
+
+function initializeFadeIn(main) {
+  const sections = [...main.querySelectorAll('.landing-section')];
+  if (!sections.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach((section) => section.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, instance) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        instance.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -124,6 +159,8 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  initializeSliders(main);
+  initializeFadeIn(main);
 }
 
 /**
