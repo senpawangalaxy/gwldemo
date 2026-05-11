@@ -118,13 +118,154 @@ function initializeSliders(main) {
     const slides = [...slider.querySelectorAll('.landing-slide')];
     if (slides.length < 2) return;
 
+    const syncVisualSel = slider.getAttribute('data-slider-sync-visual');
+    const syncRoot = syncVisualSel ? document.querySelector(syncVisualSel) : null;
+    const syncItems = syncRoot
+      ? [...syncRoot.querySelectorAll('[data-slide-for]')]
+      : [];
+
     let activeIndex = 0;
-    window.setInterval(() => {
+    let dots = [];
+
+    const syncDots = () => {
+      dots.forEach((dot, i) => {
+        const on = i === activeIndex;
+        dot.classList.toggle('is-active', on);
+        dot.setAttribute('aria-selected', on ? 'true' : 'false');
+        dot.tabIndex = on ? 0 : -1;
+      });
+    };
+
+    const syncVisual = () => {
+      const key = slides[activeIndex].dataset.slideIndex ?? String(activeIndex);
+      syncItems.forEach((el) => {
+        el.classList.toggle('is-active', el.dataset.slideFor === key);
+      });
+    };
+
+    const showSlide = (index) => {
       slides[activeIndex].classList.remove('active');
-      activeIndex = (activeIndex + 1) % slides.length;
+      activeIndex = (index + slides.length) % slides.length;
       slides[activeIndex].classList.add('active');
+      syncDots();
+      syncVisual();
+    };
+
+    const nav = document.createElement('div');
+    nav.className = 'landing-slider-nav';
+    nav.setAttribute('role', 'tablist');
+    nav.setAttribute('aria-label', 'Slides');
+
+    dots = slides.map((_, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'landing-slider-dot';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('aria-label', `Show slide ${i + 1} of ${slides.length}`);
+      if (i === 0) btn.classList.add('is-active');
+      btn.addEventListener('click', () => showSlide(i));
+      nav.append(btn);
+      return btn;
+    });
+
+    slider.append(nav);
+    syncDots();
+    syncVisual();
+
+    window.setInterval(() => {
+      showSlide(activeIndex + 1);
     }, 4500);
   });
+}
+
+/**
+ * Pointer tilt for hero visual stack (skipped when reduced motion preferred).
+ * @param {Element} root Element with [data-hero-tilt]
+ */
+function initHeroVisualTilt(root) {
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const floats = [...root.querySelectorAll('.landing-hero-float')];
+    if (!floats.length) return;
+
+    const damp = (n, max) => Math.max(-max, Math.min(max, n));
+
+    const onMove = (/** @type {PointerEvent} */ e) => {
+      const r = root.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return;
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      floats.forEach((el, i) => {
+        const f = (i + 1) * 0.9;
+        el.style.setProperty('--tilt-x', `${damp(px * 18 * f, 24)}deg`);
+        el.style.setProperty('--tilt-y', `${damp(-py * 14 * f, 18)}deg`);
+        el.style.setProperty('--parallax-x', `${damp(px * 14 * f, 20)}px`);
+        el.style.setProperty('--parallax-y', `${damp(py * 12 * f, 16)}px`);
+      });
+    };
+
+    const reset = () => {
+      floats.forEach((el) => {
+        el.style.setProperty('--tilt-x', '0deg');
+        el.style.setProperty('--tilt-y', '0deg');
+        el.style.setProperty('--parallax-x', '0px');
+        el.style.setProperty('--parallax-y', '0px');
+      });
+    };
+
+    root.addEventListener('pointermove', onMove);
+    root.addEventListener('pointerleave', reset);
+    root.addEventListener('pointercancel', reset);
+  } catch {
+    /* non-fatal */
+  }
+}
+
+/** Stagger fade-in for grid/bento children marked by [data-stagger] */
+function initializeStaggeredEntrance(main) {
+  const parents = [...main.querySelectorAll('[data-stagger]')];
+  if (!parents.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    parents.forEach((p) => {
+      [...p.children].forEach((child) => child.classList.add('is-stagger-visible'));
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const { target } = entry;
+      [...target.children].forEach((child, i) => {
+        window.setTimeout(() => child.classList.add('is-stagger-visible'), 60 * i);
+      });
+      obs.unobserve(target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+
+  parents.forEach((p) => observer.observe(p));
+}
+
+function initializeLandingHeaderEnhancements() {
+  const header = document.querySelector('.landing-header');
+  if (!header) return;
+
+  const onScroll = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('landing-header-scrolled', y > 12);
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+function initializeLandingMotion(main) {
+  const heroVisual = main.querySelector('[data-hero-tilt]');
+  if (heroVisual) initHeroVisualTilt(heroVisual);
+  initializeStaggeredEntrance(main);
 }
 
 function initializeFadeIn(main) {
@@ -161,6 +302,8 @@ export function decorateMain(main) {
   decorateButtons(main);
   initializeSliders(main);
   initializeFadeIn(main);
+  initializeLandingMotion(main);
+  initializeLandingHeaderEnhancements();
 }
 
 /**

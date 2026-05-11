@@ -18,35 +18,164 @@
         <ul class="landing-nav-list">
           <li><a href="#services">Services</a></li>
           <li><a href="#solutions">Solutions</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#testimonials">Stories</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
   <main class="landing-page">
-    <div class="section landing-section hero-section"><div><div class="landing-slider" data-slider>
-      <article class="landing-slide active"><p class="landing-kicker">Digital Experience</p><h1>Launch Better Experiences For Every Customer Journey</h1><p>Build high-performing experiences with faster delivery, beautiful UX, and data-driven outcomes.</p></article>
-      <article class="landing-slide"><p class="landing-kicker">Performance First</p><h1>Scale Campaigns Without Slowing Your Team Down</h1><p>Use reusable workflows and smart automation to speed up publishing while keeping quality high.</p></article>
-      <article class="landing-slide"><p class="landing-kicker">Customer Trust</p><h1>Create Consistent Experiences Across Every Touchpoint</h1><p>Bring content, personalization, and optimization together in one practical growth engine.</p></article>
-    </div></div></div>
-    <div id="services" class="section landing-section services-section"><div><h2>Services</h2><p>Everything you need to design, build, and optimize exceptional digital experiences.</p></div></div>
-    <div id="solutions" class="section landing-section solutions-section"><div><h2>Solutions</h2><p>Flexible implementation paths tailored to your growth stage and business priorities.</p></div></div>
-    <div id="testimonials" class="section landing-section testimonials-section"><div><h2>Testimonials</h2><div class="landing-slider" data-slider>
-      <article class="landing-slide active"><p>"The new experience is faster, cleaner, and easier to manage. Our conversion rate increased by 38% in one quarter."</p><h3>Priya Sharma</h3></article>
-      <article class="landing-slide"><p>"Their team turned our fragmented content workflow into a repeatable system that our editors actually love."</p><h3>Rohan Mehta</h3></article>
-      <article class="landing-slide"><p>"We finally have a platform that supports both speed and quality, without adding process overhead."</p><h3>Neha Verma</h3></article>
-    </div></div></div>
-    <div id="contact" class="section landing-section form-section"><div><h2>Let's Build Your Next Growth Story</h2><p>Tell us what you're solving, and our team will reach out with a practical roadmap.</p>
-      <form class="landing-form" action="#" method="post">
-        <label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required>
-        <label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required>
-        <label for="company">Company</label><input id="company" name="company" type="text" placeholder="Company name">
-        <label for="message">Project Goals</label><textarea id="message" name="message" rows="5" placeholder="Share your goals and timeline"></textarea>
-        <button type="submit" class="button primary">Send Request</button>
-      </form>
-    </div></div>
+    <div class="section landing-section hero-section">
+      <div class="landing-section-inner landing-hero-layout">
+        <div class="landing-hero-copy">
+          <div id="landing-hero-slider" class="landing-slider landing-slider-hero" data-slider data-slider-sync-visual="#landing-hero-visual">
+            <article class="landing-slide active" data-slide-index="0">
+              <p class="landing-kicker">Digital experience</p>
+              <h1>Launch Better Experiences For Every Customer Journey</h1>
+              <p class="landing-lead">Build high-performing experiences with faster delivery, beautiful UX, and data-driven outcomes.</p>
+            </article>
+            <article class="landing-slide" data-slide-index="1">
+              <p class="landing-kicker">Performance first</p>
+              <h1>Scale Campaigns Without Slowing Your Team Down</h1>
+              <p class="landing-lead">Use reusable workflows and smart automation to speed up publishing while keeping quality high.</p>
+            </article>
+            <article class="landing-slide" data-slide-index="2">
+              <p class="landing-kicker">Customer trust</p>
+              <h1>Create Consistent Experiences Across Every Touchpoint</h1>
+              <p class="landing-lead">Bring content, personalization, and optimization together in one practical growth engine.</p>
+            </article>
+          </div>
+          <div class="landing-hero-cta button-wrapper-row">
+            <p><strong><a href="#contact">Start a conversation</a></strong></p>
+            <p><em><a href="#services">Explore services</a></em></p>
+          </div>
+        </div>
+        <div id="landing-hero-visual" class="landing-hero-visual" data-hero-tilt>
+          <div class="landing-hero-blob" aria-hidden="true"></div>
+          <div class="landing-hero-float-stack" aria-hidden="true">
+            <figure class="landing-hero-float is-active" data-slide-for="0">
+              <img src="/icons/hero-dash.svg" width="360" height="240" loading="eager" decoding="async" alt="">
+            </figure>
+            <figure class="landing-hero-float" data-slide-for="1">
+              <img src="/icons/hero-flow.svg" width="360" height="240" loading="eager" decoding="async" alt="">
+            </figure>
+            <figure class="landing-hero-float" data-slide-for="2">
+              <img src="/icons/hero-experience.svg" width="360" height="240" loading="eager" decoding="async" alt="">
+            </figure>
+          </div>
+          <p class="landing-hero-visual-caption">Preview illustrations reflect each hero message and respond to your pointer on desktop.</p>
+        </div>
+      </div>
+    </div>
+    <div id="services" class="section landing-section services-section">
+      <div class="landing-section-inner">
+        <header class="landing-section-head">
+          <p class="landing-kicker">What we deliver</p>
+          <h2>Services built for momentum</h2>
+          <p class="landing-section-lead">Everything you need to design, build, and optimize exceptional digital experiences—from strategy through launch.</p>
+        </header>
+        <ul class="landing-grid" role="list" data-stagger>
+          <li class="landing-card">
+            <span class="landing-card-icon" aria-hidden="true"><img src="/icons/service-design.svg" width="40" height="40" loading="lazy" decoding="async" alt=""></span>
+            <h3>Experience design</h3>
+            <p>Research-backed UX, visual systems, and component libraries your team can reuse with confidence.</p>
+          </li>
+          <li class="landing-card">
+            <span class="landing-card-icon" aria-hidden="true"><img src="/icons/service-layers.svg" width="40" height="40" loading="lazy" decoding="async" alt=""></span>
+            <h3>Composable delivery</h3>
+            <p>Modern stacks and Edge-ready patterns so you ship faster without sacrificing accessibility or SEO.</p>
+          </li>
+          <li class="landing-card">
+            <span class="landing-card-icon" aria-hidden="true"><img src="/icons/service-growth.svg" width="40" height="40" loading="lazy" decoding="async" alt=""></span>
+            <h3>Growth &amp; optimization</h3>
+            <p>Experimentation, analytics, and content operations that turn launches into lasting business impact.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="solutions" class="section landing-section solutions-section">
+      <div class="landing-section-inner">
+        <header class="landing-section-head">
+          <p class="landing-kicker">How we partner</p>
+          <h2>Solutions that match your stage</h2>
+          <p class="landing-section-lead">Flexible implementation paths tailored to your growth stage, team shape, and business priorities.</p>
+        </header>
+        <ul class="landing-bento" role="list" data-stagger>
+          <li class="landing-bento-card landing-bento-wide">
+            <span class="landing-bento-icon" aria-hidden="true"><img src="/icons/solution-rocket.svg" width="32" height="32" loading="lazy" decoding="async" alt=""></span>
+            <h3>Launch program</h3>
+            <p>A focused build for teams that need a polished site or campaign hub in weeks, not quarters.</p>
+          </li>
+          <li class="landing-bento-card">
+            <span class="landing-bento-icon" aria-hidden="true"><img src="/icons/solution-grid.svg" width="32" height="32" loading="lazy" decoding="async" alt=""></span>
+            <h3>Platform expansion</h3>
+            <p>Scale design systems, templates, and integrations as your channels multiply.</p>
+          </li>
+          <li class="landing-bento-card">
+            <span class="landing-bento-icon" aria-hidden="true"><img src="/icons/solution-cycle.svg" width="32" height="32" loading="lazy" decoding="async" alt=""></span>
+            <h3>Continuous improvement</h3>
+            <p>Embedded optimization sprints to lift conversion, speed, and author efficiency over time.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="testimonials" class="section landing-section testimonials-section">
+      <div class="landing-section-inner">
+        <header class="landing-section-head">
+          <p class="landing-kicker">Proof in the field</p>
+          <h2>What our partners say</h2>
+          <p class="landing-section-lead">Teams trust us when experience quality and velocity both have to scale.</p>
+        </header>
+        <div class="landing-slider landing-slider-testimonials" data-slider>
+          <article class="landing-slide landing-quote active">
+            <blockquote>
+              <p>&ldquo;The new experience is faster, cleaner, and easier to manage. Our conversion rate increased by 38% in one quarter.&rdquo;</p>
+              <footer><cite>Priya Sharma</cite><span class="landing-quote-role">VP Digital, retail</span></footer>
+            </blockquote>
+          </article>
+          <article class="landing-slide landing-quote">
+            <blockquote>
+              <p>&ldquo;Their team turned our fragmented content workflow into a repeatable system that our editors actually love.&rdquo;</p>
+              <footer><cite>Rohan Mehta</cite><span class="landing-quote-role">Director of Content</span></footer>
+            </blockquote>
+          </article>
+          <article class="landing-slide landing-quote">
+            <blockquote>
+              <p>&ldquo;We finally have a platform that supports both speed and quality, without adding process overhead.&rdquo;</p>
+              <footer><cite>Neha Verma</cite><span class="landing-quote-role">Head of CX</span></footer>
+            </blockquote>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div id="contact" class="section landing-section form-section">
+      <div class="landing-section-inner landing-form-layout">
+        <header class="landing-section-head landing-form-intro">
+          <p class="landing-kicker">Next step</p>
+          <h2>Let&rsquo;s build your next growth story</h2>
+          <p class="landing-section-lead">Tell us what you&rsquo;re solving, and our team will reach out with a practical roadmap.</p>
+        </header>
+        <form class="landing-form" action="#" method="post">
+          <div class="landing-form-fields">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" placeholder="Company name" autocomplete="organization">
+            <label for="message">Project goals</label>
+            <textarea id="message" name="message" rows="5" placeholder="Share your goals and timeline"></textarea>
+          </div>
+          <button type="submit" class="button primary">Send request</button>
+        </form>
+      </div>
+    </div>
   </main>
-  <footer class="landing-footer"><div class="landing-footer-content"><p>&copy; 2026 GWL. All rights reserved.</p><p><a href="#contact">Get in touch</a></p></div></footer>
+  <footer class="landing-footer">
+    <div class="landing-footer-content">
+      <p>&copy; 2026 GWL. All rights reserved.</p>
+      <p><a href="#contact">Get in touch</a></p>
+    </div>
+  </footer>
 </body>
 </html>
